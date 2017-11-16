@@ -50,13 +50,13 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
             #naned = queries['category'].isnull().sum();
             queries['category'].fillna(0,inplace=True)
             #nani = queries.loc[queries['category'] == "-1"]
-            print queries
             #print queries
+            print queries
             grouped = queries[['category','count']].groupby('category')['count'].agg({'counter':'sum'}).reset_index()
             print grouped
 
             naned = grouped['counter'].sum()
-            #for key, item in grouped:
+            #for key, item in grouped:s
              #   new = grouped.get_group(key)
               #  group = new[['count']].agg('sum')
                # print group
