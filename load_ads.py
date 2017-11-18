@@ -9,6 +9,7 @@ data_dir = "D:\\Pobrane\\DataNinja\\ads_2016_11_01"
 index_query = 0
 index_category = 1
 index_count = 2
+print ("dupa")
 
 daily_queries = []
 category_queries = []
