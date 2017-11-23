@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae3f2806-6d77-4ce6-bcd1-a94484b303de" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ads_replies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raport/raport_ver1.pdf" afterPath="$PROJECT_DIR$/raport/raport_ver1.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/correlation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raport/raport_ver1.log" afterPath="$PROJECT_DIR$/raport/raport_ver1.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raport/raport_ver1.tex" afterPath="$PROJECT_DIR$/raport/raport_ver1.tex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +17,8 @@
       <file leaf-file-name="load_queries.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/load_queries.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="221">
+              <caret line="58" column="117" lean-forward="false" selection-start-line="58" selection-start-column="104" selection-end-line="58" selection-end-column="117" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -32,8 +29,8 @@
       <file leaf-file-name="load_ads.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/load_ads.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="89" column="61" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <state relative-caret-position="241">
+              <caret line="97" column="42" lean-forward="true" selection-start-line="97" selection-start-column="42" selection-end-line="97" selection-end-column="42" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -41,11 +38,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ads_replies.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ads_replies.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ads_replies.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="169">
-              <caret line="92" column="105" lean-forward="true" selection-start-line="92" selection-start-column="105" selection-end-line="92" selection-end-column="105" />
+              <caret line="98" column="36" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="correlation.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/correlation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="96" column="34" lean-forward="true" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -102,6 +111,7 @@
         <option value="$PROJECT_DIR$/weeklyPattern.py" />
         <option value="$PROJECT_DIR$/salesInPeriods.py" />
         <option value="$PROJECT_DIR$/ads_replies.py" />
+        <option value="$PROJECT_DIR$/correlation.py" />
       </list>
     </option>
   </component>
@@ -158,7 +168,24 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.salesInPeriods">
+  <component name="RunManager" selected="Python.correlation">
+    <configuration name="correlation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="OlxLoadQueries" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/correlation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="load_ads" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -227,18 +254,20 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.load_queries" />
       <item index="1" class="java.lang.String" itemvalue="Python.load_ads" />
       <item index="2" class="java.lang.String" itemvalue="Python.weeklyPattern" />
       <item index="3" class="java.lang.String" itemvalue="Python.salesInPeriods" />
+      <item index="4" class="java.lang.String" itemvalue="Python.correlation" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.salesInPeriods" />
-        <item index="1" class="java.lang.String" itemvalue="Python.weeklyPattern" />
-        <item index="2" class="java.lang.String" itemvalue="Python.load_ads" />
-        <item index="3" class="java.lang.String" itemvalue="Python.load_queries" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.correlation" />
+        <item index="1" class="java.lang.String" itemvalue="Python.salesInPeriods" />
+        <item index="2" class="java.lang.String" itemvalue="Python.weeklyPattern" />
+        <item index="3" class="java.lang.String" itemvalue="Python.load_ads" />
+        <item index="4" class="java.lang.String" itemvalue="Python.load_queries" />
       </list>
     </recent_temporary>
   </component>
@@ -288,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511472934330</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="plot dla odpowiedzi">
+      <created>1511476192836</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1511476192836</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -333,7 +369,8 @@
     <MESSAGE value="dodalem fajne rzeczy" />
     <MESSAGE value="Działa ads plotting" />
     <MESSAGE value="plot dla sprzedanych" />
-    <option name="LAST_COMMIT_MESSAGE" value="plot dla sprzedanych" />
+    <MESSAGE value="plot dla odpowiedzi" />
+    <option name="LAST_COMMIT_MESSAGE" value="plot dla odpowiedzi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -526,10 +563,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/load_queries.py">
+    <entry file="file://$PROJECT_DIR$/ads_replies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="32" />
+        <state relative-caret-position="169">
+          <caret line="98" column="36" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -538,18 +575,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/load_ads.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="89" column="61" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+        <state relative-caret-position="241">
+          <caret line="97" column="42" lean-forward="true" selection-start-line="97" selection-start-column="42" selection-end-line="97" selection-end-column="42" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ads_replies.py">
+    <entry file="file://$PROJECT_DIR$/load_queries.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="92" column="105" lean-forward="true" selection-start-line="92" selection-start-column="105" selection-end-line="92" selection-end-column="105" />
+        <state relative-caret-position="221">
+          <caret line="58" column="117" lean-forward="false" selection-start-line="58" selection-start-column="104" selection-end-line="58" selection-end-column="117" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/correlation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="96" column="34" lean-forward="true" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
