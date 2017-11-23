@@ -1,10 +1,11 @@
 import pandas as pd
 import os
+import time
 import matplotlib.pyplot as plt
 import numpy
 
 max_days = 1
-data_dir = "D:\\Biblioteki\\Dokumenty (D)\\Studia\\ReportNinja2\\Ads"
+data_dir = "data\\Ads"
 
 index_query = 0
 index_category = 1
@@ -13,11 +14,10 @@ index_count = 2
 
 daily_queries = []
 category_queries = []
-colNames = ['KOLA', 'KOLB']
 col_names = [
     # "id"                 # 0
     # ,"region_id"         # 1
-    # ,"category_id"       # 2
+     "category_id"       # 2
     # ,"subregion_id"      # 3
     # ,"district_id"       # 4
     # ,"city_id"           # 5
@@ -27,7 +27,7 @@ col_names = [
     # ,"created_at_first"  # 9
     # ,"valid_to"          # 10
     # ,"title"             # 11
-    # ,"description"       # 12
+     #,"description"       # 12
     # ,"full_description"  # 13
     # ,"has_phone"         # 14
     # ,"params"            # 15
@@ -36,8 +36,8 @@ col_names = [
     # ,"photo_sizes"       # 18
     # ,"paidads_id_index"  # 19
     # ,"paidads_valid_to"  # 20
-    #  "predict_sold"      # 21
-     "predict_replies"   # 22
+    ,"predict_sold"      # 21
+    ,"predict_replies"   # 22
     ,"predict_views"     # 23
     # ,"reply_call"        # 24
     # ,"reply_sms"         # 25
@@ -51,38 +51,52 @@ def convertID(txt):
         return ""
     return str(txt.strip('"'))
 
+def convertSold(number):
+    #print(number)
+    if number == None:
+        return 0
+    if number == 'f':
+        return 0
+    if number == 't':
+        return 1
+
 def convertString(txt):
     if txt is None:
         return ""
-    txt = txt.strip('"')
-    txt = txt.strip(',')
-    txt = txt.strip('"')
-    txt = txt.strip('\r')
+    txt = txt.replace('\n','')
+    txt = txt.replace('\t','')
+    txt = txt.replace('\n\n','')
+    txt = txt.replace('\r', '')
     return txt
 
-converters = {}
+converters = {21:convertSold}
 categories = []
 grouped = []
-usedCols = [22, 23]
-
+mean_sold = [];
+max_sold = [];
+std_sold = [];
+usedCols = [2, 21,22, 23]
+files = os.walk(data_dir).__next__()
+print(len(files))
 p = os.path.join(data_dir, "testads.txt")
-
+start = time.time()
 for file_index, file_name in enumerate(os.listdir(data_dir)):
-        if file_index < max_days:
+        if file_index < len(files):
             p = os.path.join(data_dir, file_name)
+
             queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
-            # print(queries);
 
-            # maxVal = queries["predict_views"].max()
-            # plt.hist(queries["predict_views"], range(0, maxValue + step, step), log=True)
+            sa = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
+            va = sa.sort_values(by=['sold'], ascending= False)
+            mean_sold.append(va['sold'].mean())
+            max_sold.append(max(va['sold']))
+            std_sold.append(va['sold'].std())
 
-            queries[["predict_views", "predict_sold"]].groupby('predict_sold')['predict_views'].agg({'iloscOdtworzen': 'sum'}).plot()
-            # queries["predict_views"].plot()
-            # plt.axis([0, len(daily_queries), min(daily_queries) , max(daily_queries)])
-            # plt.show()
-
-            a = 9
-
+end = time.time()
+print (end-start);
+print (mean_sold);
+print (max_sold);
+print (std_sold);
 
 
 
