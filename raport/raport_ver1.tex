@@ -4,24 +4,59 @@
 \usepackage[utf8]{inputenc} 
 \usepackage[MeX]{polski}
 \usepackage{nicefrac}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{float}
 
 \author{Phi Long Nguyen 116834 \\ Kajetan Gulbierz}
 
 \title{MMDS Challenge\\
 \large{{\bf Raport I}  }} 
 
-\date{25 listopada  2017}
+\date{24 listopada  2017}
 
 \begin{document}
 
 \maketitle 
 
-\section{Opis firmy}
-\paragraph{Firma Najlepsze Radio S.A.} zajmuje się wytwarzaniem treści multimedialnych i w porozumieniu z firmami komunikacyjnymi ich dystrybucją. Dzięki zastosowaniu rozwiązaniom satelitarnym zasięg rozgłośni jest ogólnopolski. Siedziba spółki znajduje się w Poznaniu – powodem wyboru lokalizacji były jedne z optymalniejszych warunki nadawania sygnału satelitarnego oraz duża dostępność do sieci Internet. W pozostałych częściach kraju firma ma swoje siedziby – w zależności od wielkości miasta różny stopień zatrudnienia. 
+\section{Histogramy}
+\paragraph{Wykresy} tyczą się plików \textit{ads}. Mają one za zadanie pokazać trendy, jakie się utrzymują na przestrzeli roku (histogram sprzedaży). Oprócz tego pozwalają zobaczyć ile ogłoszeń miało duża liczbę wyświetleń oraz dużą liczbę odpowiedzi.\
 
 
-\subsection{Struktura pracowników } 
-Liczba pracowników, ze względu na ciągły rozwój firmy systematycznie wzrasta, można jednakowoż wyróżnić następującą charakterystykę liczby zatrudnionych osób: 
+\subsection{Histogram dla sprzedaży} 
+Rysunek \ref{fig:automat} pokazuje histogram liczby sprzedaży ogółem dla każdego z miesięcy. Można załuważyć, że ogół sprzedaży jest największy dla pierwszego miesiąca w roku i stopniowo spada. Taki stan rzeczy utrzymuje się mniej więcej do sierpnia, gdzie liczba gwałtownie się podnosi. Na takie wyniki może wpływać fakt, że wrzesień jest miesiącem rozpoczynającym rok szkolny. Najmiejsze zaś wyniki można odnotować w okresie wakacyjnym.  
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{./sold.png}
+	\caption{\label{fig:automat}Histogram sprzedaży}
+\end{figure}
+
+\subsection{Histogram liczby wyświetleń} 
+Rysunek \ref{fig:wyswietlenia} pokazuje wykres liczby ogłoszeń mających mniej niż X wyświetleń. Przedziały X są oznaczone na osi-x.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{./sold.png}
+	\caption{\label{fig:wyswietlenia}Wykres wyświetleń}
+\end{figure}
+
+\subsection{Histogram liczby odpowiedzi} 
+Rysunek \ref{fig:odpowiedzi} pokazuje wykres liczby ogłoszeń mających mniej niż X odpowiedzi. Przedziały X są oznaczone na osi-x.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{./sold.png}
+	\caption{\label{fig:odpowiedzi}Wykres wyświetleń}
+\end{figure}
 
 \end{document}  
