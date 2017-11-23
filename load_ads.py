@@ -4,68 +4,91 @@ import matplotlib.pyplot as plt
 import numpy
 
 max_days = 1
-data_dir = "D:\\Pobrane\\DataNinja\\ads_2016_11_01"
+data_dir = "D:\\Biblioteki\\Dokumenty (D)\\Studia\\ReportNinja2\\Ads"
 
 index_query = 0
 index_category = 1
 index_count = 2
-print ("dupa")
+
 
 daily_queries = []
 category_queries = []
-col_names = ["query", "category", "count"]
+colNames = ['KOLA', 'KOLB']
+col_names = [
+    # "id"                 # 0
+    # ,"region_id"         # 1
+    # ,"category_id"       # 2
+    # ,"subregion_id"      # 3
+    # ,"district_id"       # 4
+    # ,"city_id"           # 5
+    # ,"accurate_location" # 6
+    # ,"user_id"           # 7
+    # ,"sorting_date"      # 8
+    # ,"created_at_first"  # 9
+    # ,"valid_to"          # 10
+    # ,"title"             # 11
+    # ,"description"       # 12
+    # ,"full_description"  # 13
+    # ,"has_phone"         # 14
+    # ,"params"            # 15
+    # ,"private_business"  # 16
+    # ,"has_person"        # 17
+    # ,"photo_sizes"       # 18
+    # ,"paidads_id_index"  # 19
+    # ,"paidads_valid_to"  # 20
+    #  "predict_sold"      # 21
+     "predict_replies"   # 22
+    ,"predict_views"     # 23
+    # ,"reply_call"        # 24
+    # ,"reply_sms"         # 25
+    # ,"reply_chat"        # 26
+    # ,"reply_call_intent" # 27
+    # ,"reply_chat_intent" # 28
+]
 
-def convert_query(a):
-    if a is None:
+def convertID(txt):
+    if txt is None:
         return ""
-    return str(a.strip('"'))
+    return str(txt.strip('"'))
 
-def convert_category(a):
-    if a is None:
-        return -1
-    a = a.strip('"')
-    a = a.strip(',')
-    a = a.strip('"')
-    return a
-    #return int(a)
+def convertString(txt):
+    if txt is None:
+        return ""
+    txt = txt.strip('"')
+    txt = txt.strip(',')
+    txt = txt.strip('"')
+    txt = txt.strip('\r')
+    return txt
 
-def convert_count(a):
-    if a is None:
-        return -1
-    a = a.strip('"')
-    a = a.strip(',')
-    a = a.strip('"')
-    return int(a)
-
-converters = {index_query:convert_query, index_category:convert_category, index_count: convert_count}
+converters = {}
 categories = []
 grouped = []
-sum = 0
-naned = 0
+usedCols = [22, 23]
+
+p = os.path.join(data_dir, "testads.txt")
+
 for file_index, file_name in enumerate(os.listdir(data_dir)):
         if file_index < max_days:
             p = os.path.join(data_dir, file_name)
-            queries = pd.read_csv(p,delimiter='","', engine="python", header =0, names = col_names, quotechar='"',
-                                   converters=converters)
+            queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
+            # print(queries);
 
-            #naned = queries['category'].isnull().sum();
-            queries['category'].fillna(0,inplace=True)
-            #nani = queries.loc[queries['category'] == "-1"]
-            #print queries
-            print queries
-            grouped = queries[['category','count']].groupby('category')['count'].agg({'counter':'sum'}).reset_index()
-            print grouped
+            # maxVal = queries["predict_views"].max()
+            # plt.hist(queries["predict_views"], range(0, maxValue + step, step), log=True)
 
-            naned = grouped['counter'].sum()
-            #for key, item in grouped:s
-             #   new = grouped.get_group(key)
-              #  group = new[['count']].agg('sum')
-               # print group
-                #sum+= grouped.get_group(key)['count'].sum();
-                #category_queries
-            daily_queries.append(queries['count'].sum())
-            grouped.plot()
+            queries[["predict_views", "predict_sold"]].groupby('predict_sold')['predict_views'].agg({'iloscOdtworzen': 'sum'}).plot()
+            # queries["predict_views"].plot()
             # plt.axis([0, len(daily_queries), min(daily_queries) , max(daily_queries)])
-            plt.show()
-print daily_queries[0]
-print sum + naned
+            # plt.show()
+
+            a = 9
+
+
+
+
+
+
+
+
+
+
