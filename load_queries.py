@@ -3,7 +3,7 @@ import os
 import matplotlib.pyplot as plt
 
 max_days = 1
-data_dir = "D:/Biblioteki/Dokumenty (D)/Studia/Search Queries"
+data_dir = "data\\Search Queries"
 
 index_query = 0
 index_category = 1
@@ -40,6 +40,10 @@ categories = []
 grouped = []
 sum = 0
 naned = 0
+print(data_dir)
+files = os.listdir(data_dir)
+print(len(files))
+
 for file_index, file_name in enumerate(os.listdir(data_dir)):
         if file_index < max_days:
             p = os.path.join(data_dir, file_name)

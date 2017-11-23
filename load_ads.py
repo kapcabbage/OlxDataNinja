@@ -75,8 +75,11 @@ grouped = []
 mean_sold = [];
 max_sold = [];
 std_sold = [];
+mean_viewed = [];
+max_viewed = [];
+std_viewed = [];
 usedCols = [2, 21,22, 23]
-files = os.walk(data_dir).__next__()
+files = os.listdir(data_dir)
 print(len(files))
 p = os.path.join(data_dir, "testads.txt")
 start = time.time()
@@ -86,18 +89,25 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
 
             queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
 
-            sa = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
-            va = sa.sort_values(by=['sold'], ascending= False)
-            mean_sold.append(va['sold'].mean())
-            max_sold.append(max(va['sold']))
-            std_sold.append(va['sold'].std())
+            viewed =  queries[["category_id", "predict_views"]].groupby('category_id')['predict_views'].agg({'viewed': 'sum'});
+            sorted_viewed =  viewed.sort_values(by=['viewed'], ascending= False)
+            mean_viewed.append(sorted_viewed['viewed'].mean())
+            max_viewed.append(max(sorted_viewed['viewed']))
+            std_viewed.append(sorted_viewed['viewed'].std())
+            # sold = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
+            # sorted_sold = sold.sort_values(by=['sold'], ascending= False)
+            # mean_sold.append(va['sold'].mean())
+            # max_sold.append(max(va['sold']))
+            # std_sold.append(va['sold'].std())
 
 end = time.time()
 print (end-start);
-print (mean_sold);
-print (max_sold);
-print (std_sold);
-
+print (mean_viewed);
+print (max_viewed);
+print (std_viewed);
+# print (mean_sold);
+# print (max_sold);
+# print (std_sold);
 
 
 
