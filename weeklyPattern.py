@@ -2,8 +2,9 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 
-max_days = 28
+
 data_dir = "D:/Biblioteki/Dokumenty (D)/Studia/ReportNinja2/Search_queries"
+max_days = 49
 
 index_query = 0
 index_category = 1
@@ -42,6 +43,14 @@ sum = 0
 naned = 0
 dniTygodnia = dict()
 
+# for i in range(0,14):
+#     dniTygodnia[i] = 2*i
+
+
+
+for i in range(1, 7+1):
+    dniTygodnia[i] = 0
+
 for file_index, file_name in enumerate(os.listdir(data_dir)):
         if file_index < max_days:
             p = os.path.join(data_dir, file_name)
@@ -49,30 +58,12 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
             queries = pd.read_csv(p,delimiter='","', engine="python", header =0, names = col_names, quotechar='"',
                                    converters=converters)
 
-            dniTygodnia[file_index] = queries['count'].agg({'counter':'sum'});
+            dniTygodnia[(file_index%7)+1] += queries['count'].agg({'counter':'sum'}).item();
+
+            print(str(file_index+1) + " / " + str(max_days))
 
 
 
-            # print (queries);
-            #naned = queries['category'].isnull().sum();
-            queries['category'].fillna(0,inplace=True) #zamien NaN na 0
-            #nani = queries.loc[queries['category'] == "-1"]
-            #print (queries)
-            #print queries
-            goupedExam = queries.groupby('category');
-            grouped = queries[['category','count']].groupby('category')['count'].agg({'counter':'sum'}).reset_index() #gruped
-            print (grouped)
-
-            naned = grouped['counter'].sum()
-            #for key, item in grouped:
-             #   new = grouped.get_group(key)
-              #  group = new[['count']].agg('sum')
-               # print group
-                #sum+= grouped.get_group(key)['count'].sum();
-                #category_queries
-            daily_queries.append(queries['count'].sum())
-            grouped.plot()
-            # plt.axis([0, len(daily_queries), min(daily_queries) , max(daily_queries)])
-            plt.show()
-print (daily_queries[0])
-print (sum + naned)
+plt.bar(range(len(dniTygodnia)), dniTygodnia.values(), align='center')
+plt.xticks(range(len(dniTygodnia)), dniTygodnia.keys())
+plt.show()
