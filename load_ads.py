@@ -15,9 +15,9 @@ index_count = 2
 daily_queries = []
 category_queries = []
 col_names = [
-    # "id"                 # 0
+     "id"                 # 0
     # ,"region_id"         # 1
-     "category_id"       # 2
+     ,"category_id"       # 2
     # ,"subregion_id"      # 3
     # ,"district_id"       # 4
     # ,"city_id"           # 5
@@ -38,7 +38,7 @@ col_names = [
     # ,"paidads_valid_to"  # 20
     ,"predict_sold"      # 21
     #,"predict_replies"   # 22
-    #,"predict_views"     # 23
+    ,"predict_views"     # 23
     # ,"reply_call"        # 24
     # ,"reply_sms"         # 25
     # ,"reply_chat"        # 26
@@ -79,7 +79,9 @@ mean_viewed = [];
 max_viewed = [];
 std_viewed = [];
 monthly_sold = [];
-usedCols = [2, 21]
+viewed_limits = dict();
+
+usedCols = [0, 2, 21,23]
 months = [];
 files = os.listdir(data_dir)
 print(len(files))
@@ -88,38 +90,52 @@ start = time.time()
 for file_index, file_name in enumerate(os.listdir(data_dir)):
         if file_index < 2:
             p = os.path.join(data_dir, file_name)
-
             queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
-            months.append(file_name)
-            # viewed =  queries[["category_id", "predict_views"]].groupby('category_id')['predict_views'].agg({'viewed': 'sum'});
-            # sorted_viewed =  viewed.sort_values(by=['viewed'], ascending= False)
-            # mean_viewed.append(sorted_viewed['viewed'].mean())
-            # max_viewed.append(max(sorted_viewed['viewed']))
-            # std_viewed.append(sorted_viewed['viewed'].std())
+            # months.append(file_name)
+            viewed =  queries[["id", "predict_views"]].groupby('id')['predict_views'].agg({'viewed': 'sum'});
+            nonzeros = viewed.loc[viewed['viewed'] != 0]
+            #mean_viewed.append(sorted_viewed['viewed'].mean())
+            # max = max(viewed['viewed']);
+            # max_viewed.append(max)
+            # #std_viewed.append(sorted_viewed['viewed'].std())
+            for key in range(1,16):
+                drop_df = nonzeros.loc[nonzeros['viewed']  < (key*1000)]
+                drop = len(drop_df.index)
+                if (key*1000) not in viewed_limits.keys():
+                    viewed_limits[key*1000] = drop
+                else:
+                    viewed_limits[key * 1000] += drop #pd.concat([viewed_limits[key*1000],drop])
+                nonzeros = pd.concat([nonzeros,drop_df]).drop_duplicates(keep=False)
+
             # sold = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
             # sorted_sold = sold.sort_values(by=['sold'], ascending= False)
             # mean_sold.append(va['sold'].mean())
             # max_sold.append(max(va['sold']))
             # std_sold.append(va['sold'].std())
 
-            sold_monthly = queries['predict_sold'].sum();
-            monthly_sold.append(sold_monthly);
+            # sold_monthly = queries['predict_sold'].sum();
+            # monthly_sold.append(sold_monthly);
 
 end = time.time()
-print(monthly_sold)
+#print(viewed)
+plt.bar(range(len(viewed_limits)), viewed_limits.values(), align='center')
+plt.xticks(range(len(viewed_limits)), viewed_limits.keys())
+plt.yscale('log')
+plt.show()
+print(viewed_limits)
 print (end-start);
-print (mean_viewed);
-print (max_viewed);
-print (std_viewed);
-data =  np.squeeze(monthly_sold);
-print(data)
-
-y_pos = np.arange(len(monthly_sold))
-x = len(monthly_sold)
-plt.bar(y_pos,monthly_sold,align='center',alpha=0.5)
-plt.xticks(y_pos, months)
-plt.ylabel('Sold number')
-plt.show();
+# print (mean_viewed);
+# print (max_viewed);
+# print (std_viewed);
+# data =  np.squeeze(monthly_sold);
+# print(data)
+#
+# y_pos = np.arange(len(monthly_sold))
+# x = len(monthly_sold)
+# plt.bar(y_pos,monthly_sold,align='center',alpha=0.5)
+# plt.xticks(y_pos, months)
+# plt.ylabel('Sold number')
+# plt.show();
 # print (mean_sold);
 # print (max_sold);
 # print (std_sold);
