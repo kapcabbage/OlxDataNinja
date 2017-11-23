@@ -3,7 +3,7 @@ import os
 import matplotlib.pyplot as plt
 
 max_days = 1
-data_dir = "H:\\Pobrane\\DataNinja\\search_queries_2016_11_01"
+data_dir = "D:/Biblioteki/Dokumenty (D)/Studia/Search Queries"
 
 index_query = 0
 index_category = 1
@@ -45,14 +45,15 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
             p = os.path.join(data_dir, file_name)
             queries = pd.read_csv(p,delimiter='","', engine="python", header =0, names = col_names, quotechar='"',
                                    converters=converters)
-
+            print (queries);
             #naned = queries['category'].isnull().sum();
-            queries['category'].fillna(0,inplace=True)
+            queries['category'].fillna(0,inplace=True) #zamien NaN na 0
             #nani = queries.loc[queries['category'] == "-1"]
-            print queries
+            #print (queries)
             #print queries
-            grouped = queries[['category','count']].groupby('category')['count'].agg({'counter':'sum'}).reset_index()
-            print grouped
+            goupedExam = queries.groupby('category');
+            grouped = queries[['category','count']].groupby('category')['count'].agg({'counter':'sum'}).reset_index() #gruped
+            print (grouped)
 
             naned = grouped['counter'].sum()
             #for key, item in grouped:
@@ -65,5 +66,5 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
             grouped.plot()
             # plt.axis([0, len(daily_queries), min(daily_queries) , max(daily_queries)])
             plt.show()
-print daily_queries[0]
-print sum + naned
+print (daily_queries[0])
+print (sum + naned)
