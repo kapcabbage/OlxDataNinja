@@ -88,7 +88,7 @@ print(len(files))
 p = os.path.join(data_dir, "testads.txt")
 start = time.time()
 for file_index, file_name in enumerate(os.listdir(data_dir)):
-        if file_index < 2:
+        if file_index < len(files):
             p = os.path.join(data_dir, file_name)
             queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
             # months.append(file_name)
@@ -106,7 +106,7 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
                 else:
                     viewed_limits[key * 1000] += drop #pd.concat([viewed_limits[key*1000],drop])
                 nonzeros = pd.concat([nonzeros,drop_df]).drop_duplicates(keep=False)
-
+            print(str(file_index + 1) + " / " + str(len(files)) + " plik: " + file_name)
             # sold = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
             # sorted_sold = sold.sort_values(by=['sold'], ascending= False)
             # mean_sold.append(va['sold'].mean())
@@ -120,6 +120,7 @@ end = time.time()
 #print(viewed)
 plt.bar(range(len(viewed_limits)), viewed_limits.values(), align='center')
 plt.xticks(range(len(viewed_limits)), viewed_limits.keys())
+plt.ylim(0,100000)
 plt.show()
 print(viewed_limits)
 print (end-start);

@@ -99,7 +99,7 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
             # max = max(viewed['viewed']);
             # max_viewed.append(max)
             # #std_viewed.append(sorted_viewed['viewed'].std())
-            for key in range(2,50):
+            for key in range(2,100):
                 drop_df = nonzeros.loc[nonzeros['viewed']  < key]
                 drop = len(drop_df.index)
                 if (key) not in viewed_limits.keys():
@@ -107,7 +107,7 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
                 else:
                     viewed_limits[key] += drop #pd.concat([viewed_limits[key*1000],drop])
                 nonzeros = pd.concat([nonzeros,drop_df]).drop_duplicates(keep=False)
-
+            print(str(file_index + 1) + " / " + str(len(files)) + " plik: " + file_name)
             # sold = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
             # sorted_sold = sold.sort_values(by=['sold'], ascending= False)
             # mean_sold.append(va['sold'].mean())

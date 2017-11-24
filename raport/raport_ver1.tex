@@ -29,7 +29,7 @@
 \maketitle 
 
 \section{{Analiza danych ogłoszeń}}
-\paragraph{Ogłoszenia} dostarczone są w formie plików, gdzie każdy z nich reprezentuje jeden miesiąc. W pliku zawierają się ogłoszenia z tego miesiąca. Każde ogłoszenie ma ściśle określoną strukturę, dzięki czemu jesteśmy w stanie je analizować. Celem zadania jest zrozumienie zjawiska jakiego dotyczą dane. 
+\paragraph{Ogłoszenia} dostarczone są w formie plików, gdzie każdy z nich reprezentuje jeden miesiąc. W pliku zawierają się ogłoszenia z tego miesiąca. Każde ogłoszenie ma ściśle określoną strukturę, dzięki czemu jesteśmy w stanie je analizować. Celem zadania jest zrozumienie zjawiska jakiego dotyczą dane. Do przeprowadzenia analizy użyliśmy języka \textit{python} wraz z narzędziem \textit{pandas}, \textit{numpy} oraz \textit{matlibplot}, który służy do generowania wykresów.  
 
 \subsection{Histogramy}
 \paragraph{Wykresy} mają za zadanie pokazać trendy, jakie się utrzymują na przestrzeli roku (histogram sprzedaży). Oprócz tego pozwalają zobaczyć ile ogłoszeń miało duża liczbę wyświetleń oraz dużą liczbę odpowiedzi.\
@@ -45,31 +45,45 @@ Rysunek \ref{fig:automat} pokazuje histogram liczby sprzedaży ogółem dla każ
 \end{figure}
 
 \subsubsection{Histogram liczby wyświetleń} 
-Rysunek \ref{fig:wyswietlenia} pokazuje wykres liczby ogłoszeń mających mniej niż X wyświetleń. Przedziały X są oznaczone na osi-x.
+Rysunek \ref{fig:wyswietlenia1} oraz \ref{fig:wyswietlenia2} pokazują wykres liczby ogłoszeń mających mniej niż X wyświetleń. Przedziały X są oznaczone na osi-x. W tym przypadku widać bardzo dużą różnicę między liczbą ogłoszeń, które zostały mało razu wyświetlany (mniej niż 1000/2000) do tych, które tych wyświetleń miało dużo.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.25]{./sold.png}
-	\caption{\label{fig:wyswietlenia}Wykres wyświetleń}
+	\includegraphics[scale=0.35]{./views1.png}
+	\caption{\label{fig:wyswietlenia1}Wykres wyświetleń}
 \end{figure}
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{./views2.png}
+	\caption{\label{fig:wyswietlenia2}Wykres wyświetleń}
+\end{figure}
 \subsubsection{Histogram liczby odpowiedzi} 
-Rysunek \ref{fig:odpowiedzi} pokazuje wykres liczby ogłoszeń mających mniej niż X odpowiedzi. Przedziały X są oznaczone na osi-x.
+Rysunek \ref{fig:odpowiedzi1} pokazuje wykres liczby ogłoszeń mających mniej niż X odpowiedzi. Przedziały X są oznaczone na osi-x.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.25]{./sold.png}
-	\caption{\label{fig:odpowiedzi}Wykres wyświetleń}
+	\includegraphics[scale=0.29]{./replies.png}
+	\caption{\label{fig:odpowiedzi1}Wykres wyświetleń}
 \end{figure}
 
 \subsubsection{Wykres korelacji} 
-Rysunek \ref{fig:korelacja} pokazuje zależność między wyświetleniami, odpowiedzią a sprzedażą w danym miesiącu. Można zauważyć o wiele większą rozpiętość zarówno wyświetleń jak i odpowiedzi dla ogłoszeń, które nie zostały zakończone sprzedażą w stosunku do tych, którym sprzedaż się powiodła. 
+Rysunek \ref{fig:korelacja}, \ref{fig:korelacja2} oraz \ref{fig:korelacja3} pokazuje zależność między wyświetleniami, odpowiedzią a sprzedażą w danym miesiącu. Można zauważyć o wiele większą rozpiętość zarówno wyświetleń jak i odpowiedzi dla ogłoszeń, które nie zostały zakończone sprzedażą w stosunku do tych, którym sprzedaż się powiodła. Należy również zwrócić uwagę na fakt, że dla każdego zbadanego miesiąca, wzorzec jest podobny.
  
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35
-	]{./correlation.png}
-	\caption{\label{fig:korelacja}Wykres korelacji}
+	\includegraphics[scale=0.35]{./correlation.png}
+	\caption{\label{fig:korelacja}Wykres korelacji pierwszy}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{./correlation2.png}
+	\caption{\label{fig:korelacja2}Wykres korelacji drugi}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{./correlation3.png}
+	\caption{\label{fig:korelacja3}Wykres korelacji trzeci}
 \end{figure}
 
 \section{Analiza danych zapytań} 
@@ -77,7 +91,7 @@ Rysunek \ref{fig:korelacja} pokazuje zależność między wyświetleniami, odpow
 
 
 \subsection{Cykliczność tygodniowa}
-Badanie cykliczności liczby zapytań ma za zadanie pomóc dostrzec wzorzec jaki spełniają dane w tygodniu. Na rysunku \ref{fig:day} można zauważyć wzrost liczby zapytań w ostatnie dni tygodnia. Najmniejszy zaś wynik przypada w piątek, co może oznaczać, że początek weekendu użytkownicy spędzają inaczej, niż na przeglądaniu ofert;
+Badanie cykliczności liczby zapytań ma za zadanie pomóc dostrzec wzorzec jaki spełniają dane w tygodniu. Na rysunku \ref{fig:day} można zauważyć wzrost liczby zapytań w ostatnie dni tygodnia. Najmniejszy zaś wynik przypada w piątek, co może oznaczać, że początek weekendu użytkownicy spędzają inaczej, niż na przeglądaniu ofert. 
    
 
 \begin{figure}[H]
@@ -92,7 +106,7 @@ Rysunek \ref{fig:iphoine} pokazuje jak zmieniała się popularność - w tym wyp
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.8]{./iphone.png}
+	\includegraphics[scale=0.9]{./iphone.png}
 	\caption{\label{fig:iphoine}Wykres popularności zapytania dla iPhone}
 \end{figure}
 

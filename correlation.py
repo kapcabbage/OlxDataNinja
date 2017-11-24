@@ -89,7 +89,7 @@ p = os.path.join(data_dir, "testads.txt")
 start = time.time()
 fig = plt.figure()
 for file_index, file_name in enumerate(os.listdir(data_dir)):
-        if file_index < 1:
+        if file_index < 3 and file_index > 1:
             p = os.path.join(data_dir, file_name)
             queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
             sold = queries.groupby('predict_sold')[["id", "predict_replies","predict_views"]];
