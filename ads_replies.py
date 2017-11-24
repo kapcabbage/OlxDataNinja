@@ -36,9 +36,9 @@ col_names = [
     # ,"photo_sizes"       # 18
     # ,"paidads_id_index"  # 19
     # ,"paidads_valid_to"  # 20
-    ,"predict_sold"      # 21
+    #,"predict_sold"      # 21
     ,"predict_replies"   # 22
-    ,"predict_views"     # 23
+    #,"predict_views"     # 23
     # ,"reply_call"        # 24
     # ,"reply_sms"         # 25
     # ,"reply_chat"        # 26
@@ -81,30 +81,31 @@ std_viewed = [];
 monthly_sold = [];
 viewed_limits = dict();
 
-usedCols = [0, 2, 21,22]
+usedCols = [0, 2 ,22]
 months = [];
 files = os.listdir(data_dir)
 print(len(files))
 p = os.path.join(data_dir, "testads.txt")
 start = time.time()
 for file_index, file_name in enumerate(os.listdir(data_dir)):
-        if file_index < 2:
+        if file_index < len(files):
             p = os.path.join(data_dir, file_name)
             queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
             # months.append(file_name)
             viewed =  queries[["id", "predict_replies"]].groupby('id')['predict_replies'].agg({'viewed': 'sum'});
             nonzeros = viewed.loc[viewed['viewed'] != 0]
+            #print (nonzeros.loc[nonzeros['viewed']  < 2])
             #mean_viewed.append(sorted_viewed['viewed'].mean())
             # max = max(viewed['viewed']);
             # max_viewed.append(max)
             # #std_viewed.append(sorted_viewed['viewed'].std())
-            for key in range(1,16):
-                drop_df = nonzeros.loc[nonzeros['viewed']  < (key*1000)]
+            for key in range(2,50):
+                drop_df = nonzeros.loc[nonzeros['viewed']  < key]
                 drop = len(drop_df.index)
-                if (key*1000) not in viewed_limits.keys():
-                    viewed_limits[key*1000] = drop
+                if (key) not in viewed_limits.keys():
+                    viewed_limits[key] = drop
                 else:
-                    viewed_limits[key * 1000] += drop #pd.concat([viewed_limits[key*1000],drop])
+                    viewed_limits[key] += drop #pd.concat([viewed_limits[key*1000],drop])
                 nonzeros = pd.concat([nonzeros,drop_df]).drop_duplicates(keep=False)
 
             # sold = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
@@ -120,7 +121,7 @@ end = time.time()
 #print(viewed)
 plt.bar(range(len(viewed_limits)), viewed_limits.values(), align='center')
 plt.xticks(range(len(viewed_limits)), viewed_limits.keys())
-plt.yscale('log')
+plt.ylim(0,50)
 plt.show()
 print(viewed_limits)
 print (end-start);

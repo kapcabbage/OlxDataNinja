@@ -37,7 +37,7 @@ col_names = [
     # ,"paidads_id_index"  # 19
     # ,"paidads_valid_to"  # 20
     ,"predict_sold"      # 21
-    #,"predict_replies"   # 22
+    ,"predict_replies"   # 22
     ,"predict_views"     # 23
     # ,"reply_call"        # 24
     # ,"reply_sms"         # 25
@@ -80,8 +80,8 @@ max_viewed = [];
 std_viewed = [];
 monthly_sold = [];
 viewed_limits = dict();
-
-usedCols = [0, 2, 21,23]
+seasons = dict();
+usedCols = [0, 2, 21,22]
 months = [];
 files = os.listdir(data_dir)
 print(len(files))
@@ -92,21 +92,14 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
             p = os.path.join(data_dir, file_name)
             queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
             # months.append(file_name)
-            viewed =  queries[["id", "predict_views"]].groupby('id')['predict_views'].agg({'viewed': 'sum'});
+            viewed =  queries[["category_id", "predict_views"]].groupby('category_id')['predict_views'].agg({'viewed': 'sum'});
             nonzeros = viewed.loc[viewed['viewed'] != 0]
+            if file_index < 3:
+                sorted = nonzeros
             #mean_viewed.append(sorted_viewed['viewed'].mean())
             # max = max(viewed['viewed']);
             # max_viewed.append(max)
             # #std_viewed.append(sorted_viewed['viewed'].std())
-            for key in range(1,16):
-                drop_df = nonzeros.loc[nonzeros['viewed']  < (key*1000)]
-                drop = len(drop_df.index)
-                if (key*1000) not in viewed_limits.keys():
-                    viewed_limits[key*1000] = drop
-                else:
-                    viewed_limits[key * 1000] += drop #pd.concat([viewed_limits[key*1000],drop])
-                nonzeros = pd.concat([nonzeros,drop_df]).drop_duplicates(keep=False)
-
             # sold = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
             # sorted_sold = sold.sort_values(by=['sold'], ascending= False)
             # mean_sold.append(va['sold'].mean())
@@ -120,6 +113,7 @@ end = time.time()
 #print(viewed)
 plt.bar(range(len(viewed_limits)), viewed_limits.values(), align='center')
 plt.xticks(range(len(viewed_limits)), viewed_limits.keys())
+plt.yscale('log')
 plt.show()
 print(viewed_limits)
 print (end-start);
