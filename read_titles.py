@@ -1,11 +1,12 @@
 import pandas as pd
 import os
 import time
+import pl_stemmer
 import matplotlib.pyplot as plt
 import numpy
 
 max_days = 1
-data_dir = "data\\Ads"
+data_dir = "D:/Biblioteki/Dokumenty (D)/Studia/ReportNinja2/Ads"
 
 index_query = 0
 index_category = 1
@@ -67,30 +68,44 @@ def convertString(txt):
     txt = txt.replace('\t','')
     txt = txt.replace('\n\n','')
     txt = txt.replace('\r', '')
-    return txt
 
-converters = {21:convertSold}
+    #stemowanie (usuwanie polskich odmian)
+    result = ""
+    for word in txt.split(" "):
+
+        stem = pl_stemmer.remove_nouns(word)
+        stem = pl_stemmer.remove_diminutive(stem)
+        stem = pl_stemmer.remove_adjective_ends(stem)
+        stem = pl_stemmer.remove_verbs_ends(stem)
+        stem = pl_stemmer.remove_adverbs_ends(stem)
+        stem = pl_stemmer.remove_plural_forms(stem)
+        stem = pl_stemmer.remove_general_ends(stem)
+        result += " " + stem;
+
+    return result
+
+converters = {11: convertString}
 categories = []
 grouped = []
 mean_sold = [];
 max_sold = [];
 std_sold = [];
 usedCols = [11]
-files = os.walk(data_dir).__next__()
-print(len(files))
-p = os.path.join(data_dir, "testads.txt")
+
+
 start = time.time()
-for file_index, file_name in enumerate(os.listdir(data_dir)):
-        if file_index < len(files):
-            p = os.path.join(data_dir, file_name)
 
-            queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
+p = os.path.join(data_dir, "001_anonimized_9")
 
-            sa = queries[["category_id", "predict_sold"]].groupby('category_id')['predict_sold'].agg({'sold': 'sum'});
-            va = sa.sort_values(by=['sold'], ascending= False)
-            mean_sold.append(va['sold'].mean())
-            max_sold.append(max(va['sold']))
-            std_sold.append(va['sold'].std())
+queries = pd.read_csv(p,  header=0, usecols=usedCols, names=col_names, converters=converters)
+
+print(queries)
+
+outputDir = "D:/Biblioteki/Dokumenty (D)/Studia/ReportNinja2/Cechy/titles"
+queries.to_csv(outputDir, index=False);
+pl_stemmer
+
+
 
 end = time.time()
 print (end-start);

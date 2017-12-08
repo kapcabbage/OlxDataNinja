@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 
 
 data_dir = "D:/Biblioteki/Dokumenty (D)/Studia/ReportNinja2/Search_queries"
-max_days = 14*8 #os.listdir(data_dir).__len__()
+
+mies = 12
+max_days = 14*mies #os.listdir(data_dir).__len__()
+
 
 index_query = 0
 index_category = 1
@@ -48,7 +51,7 @@ dni = dict()
 dayCounter = 1
 monthIndex = 1
 for file_index, file_name in enumerate(os.listdir(data_dir)):
-    if file_index > (14*6)-1:
+    if file_index > (14*(mies-1))-1:
         if file_index < max_days:
             p = os.path.join(data_dir, file_name)
 
@@ -70,7 +73,7 @@ for file_index, file_name in enumerate(os.listdir(data_dir)):
     print(str(file_index+1) + " / " + str(max_days) + " plik: " + file_name)
 
 
-
+print(dni)
 plt.bar(range(len(dni)), dni.values(), align='center')
 plt.xticks(range(len(dni)), dni.keys())
 plt.show()
